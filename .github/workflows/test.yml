@@ -2,7 +2,9 @@ name: "Run Scan Action"
 
 on:
   workflow_dispatch:
-  push: [main]
+  push:
+    branches:
+      - main
 
 jobs:
   sarif-image:
