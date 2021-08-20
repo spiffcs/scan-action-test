@@ -15,7 +15,7 @@ jobs:
     - name: Run the latest released Scan Action with SARIF generation enabled
       uses: anchore/scan-action@next
       with:
-        image: "python:3.8"
+        path: "."
         debug: true
         fail-build: false
         acs-report-enable: true
