@@ -12,6 +12,14 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v1
+      with:
+        languages: javascript
+
+    - name: Perform CodeQL Analysis
+      uses: github/codeql-action/analyze@v1
+
     - name: Run the latest released Scan Action with SARIF generation enabled
       uses: anchore/scan-action@main
       with:
