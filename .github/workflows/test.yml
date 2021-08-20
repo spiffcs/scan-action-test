@@ -20,7 +20,7 @@ jobs:
         fail-build: false
         acs-report-enable: true
 
-    - uses: actions/upload-artifacts@v2
+    - uses: actions/upload-artifact@v2
       with:
         name: files
         path: |
