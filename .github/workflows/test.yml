@@ -21,14 +21,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Run the Anchore scan action itself with GitHub Advanced Security code scanning integration enabled
-        uses: anchore/scan-action@36bd2c8c3b017db8c98ffbb5f866533890b7aef1
+      - name: Run the Anchore scan action
+        uses: anchore/scan-action@main
         id: scan
         with:
-          image: "alpine:latest"
+          image: "alpine:3.15"
           fail-build: true
           severity-cutoff: critical
-      - name: Upload Anchore scan Report
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: ${{ steps.scan.outputs.sarif }}
+          output-format: table
+#      - name: Upload Anchore scan Report
+#        uses: github/codeql-action/upload-sarif@v2
+#        with:
+#          sarif_file: ${{ steps.scan.outputs.sarif }}
