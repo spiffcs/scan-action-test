@@ -21,11 +21,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: anchore/sbom-action@main
+        with:
+          image: "alpine:3.15"
+          format: json
+          output-file: sbom.json
       - name: Run the Anchore scan action
         uses: anchore/scan-action@main
         id: scan
         with:
-          image: "alpine:3.15"
+#          image: "alpine:3.15"
+          sbom: sbom.json
           fail-build: true
           severity-cutoff: critical
           output-format: table
