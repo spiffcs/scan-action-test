@@ -21,7 +21,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: anchore/sbom-action@main
+      - uses: anchore/sbom-action@main
         with:
           image: "alpine:3.15"
           format: json
