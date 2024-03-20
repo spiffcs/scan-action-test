@@ -43,7 +43,7 @@ jobs:
           mkdir -p _build
           cp "${{ steps.scan.outputs.json }}" _build/vulnerabilities.json
           ls -ltr _build
-          cat _build/vulnerabilities.json
+          cat _build/vulnerabilities.json | head -10
 
 #      - name: Upload Anchore scan Report
 #        uses: github/codeql-action/upload-sarif@v2
