@@ -24,7 +24,7 @@ jobs:
 
       - uses: anchore/sbom-action@v3
         with:
-          image: "alpine:3.16"
+          image: alpine:3.16
           format: json
           output-file: sbom.json
 
@@ -34,10 +34,16 @@ jobs:
         with:
           sbom: sbom.json
           fail-build: true
-          severity-cutoff: critical
-          output-format: table
+          severity-cutoff: medium
+          output-format: json
 
-      - name: Upload Anchore scan Report
-        uses: github/codeql-action/upload-sarif@v2
-        with:
-          sarif_file: ${{ steps.scan.outputs.sarif }}
+      - name: Copy JSON
+        run: |
+          mkdir -p _build
+          cp "${{ steps.scan.outputs.json }}" "_build/vulnerabilities.json"
+          ls -ltr _build
+
+#      - name: Upload Anchore scan Report
+#        uses: github/codeql-action/upload-sarif@v2
+#        with:
+#          sarif_file: ${{ steps.scan.outputs.sarif }}
