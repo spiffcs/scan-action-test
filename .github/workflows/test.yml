@@ -39,6 +39,7 @@ jobs:
 
       - name: Copy JSON
         run: |
+          set -x
           mkdir -p _build
           cp "${{ steps.scan.outputs.json }}" _build/vulnerabilities.json
           ls -ltr _build
