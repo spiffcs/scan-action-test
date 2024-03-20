@@ -29,7 +29,7 @@ jobs:
           output-file: sbom.json
 
       - name: Run the Anchore scan action
-        uses: anchore/scan-action@v3
+        uses: anchore/scan-action@main
         id: scan
         with:
           sbom: sbom.json
