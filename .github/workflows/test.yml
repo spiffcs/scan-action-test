@@ -22,14 +22,14 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - uses: anchore/sbom-action@v3
+      - uses: anchore/sbom-action@v0
         with:
           image: alpine:3.16
           format: json
           output-file: sbom.json
 
       - name: Run the Anchore scan action
-        uses: anchore/scan-action@v0
+        uses: anchore/scan-action@v3
         id: scan
         with:
           sbom: sbom.json
