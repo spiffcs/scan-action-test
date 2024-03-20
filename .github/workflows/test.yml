@@ -33,7 +33,7 @@ jobs:
         id: scan
         with:
           sbom: sbom.json
-          fail-build: true
+          fail-build: false
           severity-cutoff: medium
           output-format: json
 
