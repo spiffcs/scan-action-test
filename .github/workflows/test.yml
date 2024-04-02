@@ -34,7 +34,7 @@ jobs:
         with:
 #          sbom: sbom.json
           image: alpine:3.15
-          fail-build: false
+          fail-build: true
           severity-cutoff: medium
           output-format: json
 
