@@ -3,13 +3,18 @@ set -x
 
 ifconfig
 
+iface=eth0
+if [[ "$(ifconfig|grep en0)" != "" ]]; then
+  iface=en0
+fi
+
 timing_file="$(dirname $0)/curl-timing-info-template.txt"
 
 test_download() {
   url=$1
 
   # download with IPv6
-  curl -sL6 -w "@$timing_file" -D /dev/stdout $url -o /dev/null
+  curl --interface "$iface" -sL6 -w "@$timing_file" -D /dev/stdout $url -o /dev/null
 
   # download with IPv4
   curl -sL4 -w "@$timing_file" -D /dev/stdout $url -o /dev/null
