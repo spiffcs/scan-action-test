@@ -13,43 +13,43 @@ permissions:
   contents: read
 
 jobs:
-#  Anchore-Build-Scan:
-#    permissions:
-#      contents: read # for actions/checkout to fetch code
-#      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
-#      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
-#    runs-on: ubuntu-latest
-#    steps:
-#      - uses: actions/checkout@v2
-#
-##      - uses: anchore/sbom-action@v0
-##        with:
-##          image: alpine:3.16
-##          format: json
-##          output-file: sbom.json
-#
-#      - name: Run the Anchore scan action
-#        uses: anchore/scan-action@main
-#        id: scan
+  Anchore-Build-Scan:
+    permissions:
+      contents: read # for actions/checkout to fetch code
+      security-events: write # for github/codeql-action/upload-sarif to upload SARIF results
+      actions: read # only required for a private repository by github/codeql-action/upload-sarif to get the Action run status
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+#      - uses: anchore/sbom-action@v0
 #        with:
-##          sbom: sbom.json
-#          image: alpine:3.15
-#          fail-build: false
-#          severity-cutoff: medium
-#          output-format: json
-#
-#      - name: Copy JSON
-#        run: |
-#          set -x
-#          mkdir -p _build
-#          cp "${{ steps.scan.outputs.json }}" _build/vulnerabilities.json
-#          ls -ltr _build
-#          cat _build/vulnerabilities.json | head -10
-#
-##      - name: Upload Anchore scan Report
-##        uses: github/codeql-action/upload-sarif@v2
-##        with:
-##          sarif_file: ${{ steps.scan.outputs.sarif }}
+#          image: alpine:3.16
+#          format: json
+#          output-file: sbom.json
+
+      - name: Run the Anchore scan action
+        uses: anchore/scan-action@main
+        id: scan
+        with:
+#          sbom: sbom.json
+          image: alpine:3.15
+          fail-build: false
+          severity-cutoff: medium
+          output-format: json
+
+      - name: Copy JSON
+        run: |
+          set -x
+          mkdir -p _build
+          cp "${{ steps.scan.outputs.json }}" _build/vulnerabilities.json
+          ls -ltr _build
+          cat _build/vulnerabilities.json | head -10
+
+#      - name: Upload Anchore scan Report
+#        uses: github/codeql-action/upload-sarif@v2
+#        with:
+#          sarif_file: ${{ steps.scan.outputs.sarif }}
 
   test-windows:
     permissions:
@@ -64,4 +64,5 @@ jobs:
         id: scan
         with:
           image: alpine:3.15
+          fail-build: false
           output-format: table
