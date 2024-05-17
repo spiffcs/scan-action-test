@@ -29,7 +29,7 @@ jobs:
 #          output-file: sbom.json
 
       - name: Run the Anchore scan action
-        uses: anchore/scan-action@main
+        uses: kzantow-anchore/scan-action@fix/execute-on-windows
         id: scan
         with:
 #          sbom: sbom.json
