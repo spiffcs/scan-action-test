@@ -59,7 +59,8 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Run the Anchore scan action
-        uses: anchore/scan-action@latest
+        uses: kzantow-anchore/scan-action@fix/execute-on-windows
+#        uses: anchore/scan-action@latest
         id: scan
         with:
           image: alpine:3.15
