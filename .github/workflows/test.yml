@@ -22,12 +22,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-#      - uses: anchore/sbom-action@v0
-#        with:
-#          image: alpine:3.16
-#          format: json
-#          output-file: sbom.json
-#
+      - uses: kzantow-anchore/sbom-action@feat/cache-grype-db
+        with:
+          image: alpine:3.15
+          format: json
+          output-file: sbom.json
+
 #      - name: Run the Anchore scan action
 #        uses: anchore/scan-action@main
 #        with:
