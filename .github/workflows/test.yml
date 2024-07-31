@@ -56,6 +56,9 @@ jobs:
           fail-build: false
           severity-cutoff: medium
           output-format: sarif
+        env:
+          GRYPE_CONFIG: ./my-config.yml
+          GRYPE_ONLY_FIXED: true
 
       - name: Copy JSON
         run: |
