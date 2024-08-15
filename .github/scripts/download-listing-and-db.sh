@@ -26,3 +26,9 @@ test_download https://toolbox-data.anchore.io/grype/databases/listing.json
 db_file="$(curl -sL https://toolbox-data.anchore.io/grype/databases/listing.json | jq -r '.["available"]["5"][0]["url"]')"
 
 test_download $db_file
+
+if [[ "$?" != "0" ]]; then
+  test_download $db_file
+
+  exit 1
+fi
