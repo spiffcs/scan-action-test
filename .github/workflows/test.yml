@@ -56,7 +56,7 @@ jobs:
       # https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/
       - run: |
           VULN_REPORT="$(cat table.out)"
-          printf "# Vulnerability Report Summary\n```$VULN_REPORT\n```" > $GITHUB_STEP_SUMMARY
+          printf "# Vulnerability Report Summary\n<pre>$VULN_REPORT</pre>" > $GITHUB_STEP_SUMMARY
 
       - run: echo "::warning title=Vulnerability Report Annotation::$(cat table.out)"
 
