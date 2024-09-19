@@ -41,6 +41,11 @@ jobs:
           fail-build: false
           output-format: table
 
+      - name: Generate Warning Annotations
+        run: |
+          text="This is a Warning"
+          echo "::warning file=app.js,line=1,col=5::$text"
+
       - uses: anchore/scan-action@main
         id: scan-table-to-file
         with:
