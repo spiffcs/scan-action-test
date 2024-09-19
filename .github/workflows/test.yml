@@ -54,9 +54,9 @@ jobs:
       - run: cat table.out
 
       # https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/
-      - run: echo "# Vulnerability report\n$(cat table.out)" > $GITHUB_STEP_SUMMARY
+      - run: printf "# Vulnerability Report Summary\n```$(cat table.out)\n```" > $GITHUB_STEP_SUMMARY
 
-      - run: echo "::warning title=Vulnerability Report::$(cat table.out)"
+      - run: echo "::warning title=Vulnerability Report Annotation::$(cat table.out)"
 
       - uses: anchore/scan-action@main
         id: scan-json
