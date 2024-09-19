@@ -41,11 +41,6 @@ jobs:
           fail-build: false
           output-format: table
 
-      - name: Generate Warning Annotations
-        run: |
-          text="This is a Warning"
-          echo "::warning file=app.js,line=1,col=5::$text"
-
       - uses: anchore/scan-action@main
         id: scan-table-to-file
         with:
@@ -57,6 +52,11 @@ jobs:
           GRYPE_FILE: table.out
 
       - run: cat table.out
+
+      # https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/
+      - run: echo "# Vulnerability report\n$(cat table.out)" > $GITHUB_STEP_SUMMARY
+
+      - run: echo "::warning title=Vulnerability Report::$(cat table.out)"
 
       - uses: anchore/scan-action@main
         id: scan-json
