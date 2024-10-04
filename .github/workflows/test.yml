@@ -41,7 +41,7 @@ jobs:
           fail-build: false
           output-format: table
 
-      - uses: anchore/scan-action@main
+      - uses: kzantow-anchore/scan-action@feat/cache-grype-db
         id: scan-table-to-file
         with:
           image: alpine:3.15
@@ -58,7 +58,7 @@ jobs:
           VULN_REPORT="$(cat table.out)"
           printf "# Vulnerability Report Summary\n<pre>$VULN_REPORT</pre>" > $GITHUB_STEP_SUMMARY
 
-      - run: echo "::warning title=Vulnerability Report Annotation::$(cat table.out)"
+      - run: echo "::warning title=Vulnerability Report Annotation,file=package.json,line=2::$VULN_REPORT"
 
       - uses: anchore/scan-action@main
         id: scan-json
