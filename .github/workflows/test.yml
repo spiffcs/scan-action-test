@@ -43,7 +43,9 @@ jobs:
           output-format: table
 
       - run: |
-          echo scan1: ${{ steps.scan1.outputs.sarif }}
+          echo scan1: ${{ steps.scan1.outputs.table }}
+          ls ${{ steps.scan1.outputs.table }}
+          head ${{ steps.scan1.outputs.table }}
 
       - uses: kzantow-anchore/scan-action@feat/output-file
         id: scan2
@@ -54,7 +56,9 @@ jobs:
           output-file: "./alpine-3.15"
 
       - run: |
-          echo scan2: ${{ steps.scan2.outputs.sarif }}
+          echo scan2: ${{ steps.scan2.outputs.table }}
+          ls ${{ steps.scan2.outputs.table }}
+          head ${{ steps.scan2.outputs.table }}
 
       - uses: kzantow-anchore/scan-action@feat/output-file
         id: scan3
@@ -65,6 +69,8 @@ jobs:
 
       - run: |
           echo scan3: ${{ steps.scan3.outputs.json }}
+          ls ${{ steps.scan3.outputs.json }}
+          head ${{ steps.scan3.outputs.json }}
 
       - uses: kzantow-anchore/scan-action@feat/output-file
         id: scan4
@@ -76,6 +82,8 @@ jobs:
 
       - run: |
           echo scan4: ${{ steps.scan4.outputs.json }}
+          ls ${{ steps.scan4.outputs.json }}
+          head ${{ steps.scan4.outputs.json }}
 
       - uses: kzantow-anchore/scan-action@feat/output-file
         id: scan5
@@ -86,6 +94,8 @@ jobs:
 
       - run: |
           echo scan5: ${{ steps.scan5.outputs.sarif }}
+          ls ${{ steps.scan5.outputs.sarif }}
+          head ${{ steps.scan5.outputs.sarif }}
 
       - uses: kzantow-anchore/scan-action@feat/output-file
         id: scan6
@@ -97,6 +107,8 @@ jobs:
 
       - run: |
           echo scan6: ${{ steps.scan6.outputs.sarif }}
+          ls ${{ steps.scan6.outputs.sarif }}
+          head ${{ steps.scan6.outputs.sarif }}
 
       # https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/
       - run: |
