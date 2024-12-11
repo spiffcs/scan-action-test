@@ -41,9 +41,9 @@ jobs:
           image: alpine:3.15
           fail-build: false
           output-format: table
-          cache-db: true
 
-      - run: ${{ steps.scan1.outputs.table }}
+      - run: |
+          echo scan1: ${{ steps.scan1.outputs.sarif }}
 
       - uses: kzantow-anchore/scan-action@feat/output-file
         id: scan2
@@ -52,9 +52,9 @@ jobs:
           fail-build: false
           output-format: table
           output-file: "./alpine-3.15"
-          cache-db: true
 
-      - run: ${{ steps.scan2.outputs.table }}
+      - run: |
+          echo scan2: ${{ steps.scan2.outputs.sarif }}
 
       - uses: kzantow-anchore/scan-action@feat/output-file
         id: scan3
@@ -62,9 +62,9 @@ jobs:
           image: alpine:3.15
           fail-build: false
           output-format: json
-          cache-db: true
 
-      - run: ${{ steps.scan3.outputs.json }}
+      - run: |
+          echo scan3: ${{ steps.scan3.outputs.json }}
 
       - uses: kzantow-anchore/scan-action@feat/output-file
         id: scan4
@@ -73,9 +73,9 @@ jobs:
           fail-build: false
           output-format: json
           output-file: "./alpine-3.15.json"
-          cache-db: true
 
-      - run: ${{ steps.scan4.outputs.json }}
+      - run: |
+          echo scan4: ${{ steps.scan4.outputs.json }}
 
       - uses: kzantow-anchore/scan-action@feat/output-file
         id: scan5
@@ -83,9 +83,9 @@ jobs:
           image: alpine:3.15
           fail-build: false
           output-format: sarif
-          cache-db: true
 
-      - run: ${{ steps.scan5.outputs.sarif }}
+      - run: |
+          echo scan5: ${{ steps.scan5.outputs.sarif }}
 
       - uses: kzantow-anchore/scan-action@feat/output-file
         id: scan6
@@ -94,9 +94,9 @@ jobs:
           fail-build: false
           output-format: sarif
           output-file: "./alpine-3.15.sarif.json"
-          cache-db: true
 
-      - run: ${{ steps.scan6.outputs.sarif }}
+      - run: |
+          echo scan6: ${{ steps.scan6.outputs.sarif }}
 
       # https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/
       - run: |
