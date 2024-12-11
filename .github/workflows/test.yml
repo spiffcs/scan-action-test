@@ -110,13 +110,6 @@ jobs:
           ls ${{ steps.scan6.outputs.sarif }}
           head ${{ steps.scan6.outputs.sarif }}
 
-      # https://github.blog/news-insights/product-news/supercharging-github-actions-with-job-summaries/
-      - run: |
-          VULN_REPORT="$(cat table.out)"
-          printf "# Vulnerability Report Summary\n<pre>$VULN_REPORT</pre>" > $GITHUB_STEP_SUMMARY
-
-      - run: echo "::warning title=Vulnerability Report Annotation,file=package.json,line=2::$VULN_REPORT"
-
       - uses: anchore/scan-action@main
         id: scan-json
         with:
