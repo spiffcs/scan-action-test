@@ -40,14 +40,8 @@ jobs:
         with:
           image: alpine:3.15
           fail-build: false
-          output-format: table
+          output-format: sarif
           cache-db: true
-
-      - run: |
-          echo scan1: ${{ steps.scan1.outputs.table }}
-          ls ${{ steps.scan1.outputs.table }}
-          head ${{ steps.scan1.outputs.table }}
-
 
       - name: Upload Anchore scan Report
         uses: github/codeql-action/upload-sarif@v3
