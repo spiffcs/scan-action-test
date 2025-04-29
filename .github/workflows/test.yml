@@ -35,107 +35,19 @@ jobs:
 #          fail-build: false
 #          output-format: table
 
-      - uses: kzantow-anchore/scan-action@feat/output-file
+      - uses: anchore/scan-action@scan-action-v6
         id: scan1
         with:
           image: alpine:3.15
           fail-build: false
           output-format: table
+          cache-db: true
 
       - run: |
           echo scan1: ${{ steps.scan1.outputs.table }}
           ls ${{ steps.scan1.outputs.table }}
           head ${{ steps.scan1.outputs.table }}
 
-      - uses: kzantow-anchore/scan-action@feat/output-file
-        id: scan2
-        with:
-          image: alpine:3.15
-          fail-build: false
-          output-format: table
-          output-file: "./alpine-3.15"
-
-      - run: |
-          echo scan2: ${{ steps.scan2.outputs.table }}
-          ls ${{ steps.scan2.outputs.table }}
-          head ${{ steps.scan2.outputs.table }}
-
-      - uses: kzantow-anchore/scan-action@feat/output-file
-        id: scan3
-        with:
-          image: alpine:3.15
-          fail-build: false
-          output-format: json
-
-      - run: |
-          echo scan3: ${{ steps.scan3.outputs.json }}
-          ls ${{ steps.scan3.outputs.json }}
-          head ${{ steps.scan3.outputs.json }}
-
-      - uses: kzantow-anchore/scan-action@feat/output-file
-        id: scan4
-        with:
-          image: alpine:3.15
-          fail-build: false
-          output-format: json
-          output-file: "./alpine-3.15.json"
-
-      - run: |
-          echo scan4: ${{ steps.scan4.outputs.json }}
-          ls ${{ steps.scan4.outputs.json }}
-          head ${{ steps.scan4.outputs.json }}
-
-      - uses: kzantow-anchore/scan-action@feat/output-file
-        id: scan5
-        with:
-          image: alpine:3.15
-          fail-build: false
-          output-format: sarif
-
-      - run: |
-          echo scan5: ${{ steps.scan5.outputs.sarif }}
-          ls ${{ steps.scan5.outputs.sarif }}
-          head ${{ steps.scan5.outputs.sarif }}
-
-      - uses: kzantow-anchore/scan-action@feat/output-file
-        id: scan6
-        with:
-          image: alpine:3.15
-          fail-build: false
-          output-format: sarif
-          output-file: "./alpine-3.15.sarif.json"
-
-      - run: |
-          echo scan6: ${{ steps.scan6.outputs.sarif }}
-          ls ${{ steps.scan6.outputs.sarif }}
-          head ${{ steps.scan6.outputs.sarif }}
-
-      - uses: anchore/scan-action@main
-        id: scan-json
-        with:
-          image: alpine:3.15
-          fail-build: false
-          severity-cutoff: medium
-          output-format: json
-
-      - uses: anchore/scan-action@main
-        id: scan-sarif
-        with:
-          image: alpine:3.15
-          fail-build: false
-          severity-cutoff: medium
-          output-format: sarif
-        env:
-          GRYPE_CONFIG: ./my-config.yml
-          GRYPE_ONLY_FIXED: true
-
-      - name: Copy JSON
-        run: |
-          set -x
-          mkdir -p _build
-          cp "${{ steps.scan-json.outputs.json }}" _build/vulnerabilities.json
-          ls -ltr _build
-          cat _build/vulnerabilities.json | head -10
 
       - name: Upload Anchore scan Report
         uses: github/codeql-action/upload-sarif@v3
